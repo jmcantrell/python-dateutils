@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python-setuptools-deploy ~/development/python/dateutils
