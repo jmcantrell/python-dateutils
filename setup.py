@@ -5,7 +5,7 @@ from glob import glob
 
 setup(
         name='DateUtils',
-        version='0.2',
+        version='0.4',
         description='Various small utilities for working with date/datetime objects.',
         author='Jeremy Cantrell',
         author_email='jmcantrell@gmail.com',
@@ -21,7 +21,17 @@ setup(
             'python-dateutil>=1.4.1',
             'pytz'
             ],
+        entry_points={
+            'console_scripts': [
+                'dateadd=dateadd:main',
+                'datediff=datediff:main',
+                ]
+            },
         packages=[
             'dateutils',
             ],
+        py_modules=[
+            'dateadd',
+            'datediff',
+            ]
         )
