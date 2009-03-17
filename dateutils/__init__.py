@@ -2,15 +2,16 @@
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
 __url__     = 'http://jeremycantrell.com'
-__date__    = 'Mon 2008-09-29 22:33:53 (-0400)'
+__date__    = 'Tue 2009-03-17 16:59:15 (-0400)'
 __license__ = 'GPL'
 
-import calendar, pytz
+import calendar, pytz, math
 from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
 from dateutil.parser import parse
 
-TIME_UNITS = ['business', 'years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'microseconds']
+TIME_UNITS = ['business_days', 'years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'microseconds']
+BUSINESS_DAY, YEAR, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MICROSECOND = range(len(TIME_UNITS))
 QUARTER_MONTHS = [10, 1, 4, 7]
 
 def timezone(dt, timezone='utc'): #{{{1
@@ -23,48 +24,59 @@ def timezone_convert(dt, timezone): #{{{1
     timezone = pytz.timezone(timezone)
     return dt.astimezone(timezone)
 
-def increment(dt, business=0, **inc): #{{{1
+def increment(dt, business_days=0, holidays=[], **inc): #{{{1
     """Increment a date by the given amount.
     Arguments:
         dt -- the date to increment
     Keyword arguments:
+        holidays -- list of holiday dates
+        business_days -- number of business days to increment
         years -- number of years to increment
         months -- number of months to increment
         weeks -- number of weeks to increment
         days -- number of days to increment
-        business -- number of business days to increment
         hours -- number of hours to increment
         minutes -- number of minutes to increment
         seconds -- number of seconds to increment
         microseconds -- number of microseconds to increment
     """
     new_dt = dt + relativedelta(**inc)
-    if business != 0:
-        i = business / abs(business)
-        while business != 0:
+    if business_days != 0:
+        i = business_days / abs(business_days)
+        while business_days != 0:
             while True:
                 new_dt = increment(new_dt, days=i)
-                if new_dt.weekday() not in (calendar.SATURDAY, calendar.SUNDAY): break
-            business -= i
+                if is_business_day(new_dt, holidays):
+                    break
+            business_days -= i
     return new_dt
 
-def date_range(start_dt, end_dt, **inc): #{{{1
+def is_business_day(dt, holidays=[]): #{{{1
+    if dt.weekday() in (calendar.SATURDAY, calendar.SUNDAY): return False
+    if holidays and dt in holidays: return False
+    return True
+
+def date_range(start_dt, end_dt, holidays=[], **inc): #{{{1
     """Generate a range of dates/datetimes based on the given increment."""
-    cur_dt = start_dt
-    while cur_dt <= end_dt:
+    # If incrementing by business days, make sure we start on one
+    if inc.get('business_days', 0) and not is_business_day(start_dt, holidays=holidays):
+        cur_dt = increment(start_dt, business_days=1, holidays=holidays)
+    else:
+        cur_dt = start_dt
+    while cur_dt < end_dt:
         yield cur_dt
         prev_dt = cur_dt
         cur_dt = increment(cur_dt, **inc)
         if cur_dt == prev_dt: break
 
-def month_begin(d): #{{{1
+def month_start(d): #{{{1
     """Get the beginning of the month for a given date."""
     return date(*d.timetuple()[:2]+(1,))
 
 def month_end(d): #{{{1
     """Get the end of the month for a given date."""
     new_dt = increment(d, months=1)
-    return month_begin(dt) - timedelta(days=1)
+    return month_start(dt) - timedelta(days=1)
 
 def quarter(dt): #{{{1
     """Get the quarter for a given date."""
@@ -72,12 +84,46 @@ def quarter(dt): #{{{1
     for qm in quarter_months:
         if dt.month in qm: return quarter_months.index(qm) + 1
 
+def quarter_start(dt): #{{{1
+    """Get the beginning of the quarter for a given date."""
+    m = QUARTER_MONTHS.index(quarter(dt)-1) + 2
+    return date(dt.year, m, 1)
+
 def quarter_end(dt): #{{{1
     """Get the end of the quarter for a given date."""
     m = QUARTER_MONTHS.index(quarter(dt)-1) + 2
     return month_end(date(dt.year, m, 1))
 
-def quarter_begin(dt): #{{{1
-    """Get the beginning of the quarter for a given date."""
-    m = QUARTER_MONTHS.index(quarter(dt)-1) + 2
-    return date(dt.year, m, 1)
+def day_of_year(dt): #{{{1
+    return dt.timetuple()[7]
+
+def microseconds(end_dt, start_dt): #{{{1
+    d = end_dt - start_dt
+    return (d.days*24*60*60*1000000)+(d.seconds*1000000)
+
+def seconds(end_dt, start_dt) : #{{{1
+    d = end_dt - start_dt
+    return (d.days*24*60*60)+d.seconds
+
+def minutes(end_dt, start_dt): #{{{1
+    d = end_dt - start_dt
+    return (d.days*24*60)+(d.seconds/60)
+
+def hours(end_dt, start_dt): #{{{1
+    d = end_dt - start_dt
+    return (d.days*24)+(d.seconds/60/60)
+
+def days(end_dt, start_dt): #{{{1
+    return (end_dt - start_dt).days
+
+def weeks(end_dt, start_dt): #{{{1
+    return int(math.ceil(days(end_dt, start_dt)/7.0))
+
+def months(end_dt, start_dt): #{{{1
+    return days(end_dt, start_dt)/31
+
+def years(end_dt, start_dt): #{{{1
+    return months(end_dt, start_dt)/12
+
+def business_days(end_dt, start_dt, holidays=[]): #{{{1
+    return len(list(date_range(start_dt, end_dt, business_days=1, holidays=holidays)))
