@@ -1,3 +1,25 @@
+DateUtils
+=========
+
+The main purpose of this package is to provide more complex arithmetic
+operations on dates/times. Heavy use is made of the relativedelta type from
+Labix's dateutil library. Much of this package is just a light wrapper on top
+of this with some added features such as range generation and business day
+calculation.
+
+Console Scripts
+---------------
+
+The main reason why this package exists is to support the two included console scripts.
+
+* dateadd - Increment/decrement a date/time by various time units
+* datediff - Get the difference of two dates in various time units
+
+Read the help information for each (-h) to see the available options and usage.
+
+Installation
+------------
+
 If you have setuptools installed, you can install DateUtils with:
 
     easy_install DateUtils
