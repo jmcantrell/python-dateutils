@@ -5,7 +5,7 @@ from glob import glob
 
 setup(
         name='DateUtils',
-        version='0.4',
+        version='0.4.1',
         description='Various small utilities for working with date/datetime objects.',
         author='Jeremy Cantrell',
         author_email='jmcantrell@gmail.com',
@@ -18,6 +18,7 @@ setup(
             'Programming Language :: Python',
             ],
         install_requires=[
+            'ScriptUtils>=0.4.1',
             'python-dateutil>=1.4.1',
             'pytz'
             ],
