@@ -18,7 +18,7 @@ setup(
             'Programming Language :: Python',
             ],
         install_requires=[
-            'ScriptUtils>=0.4.1',
+            'ScriptUtils>=0.5',
             'python-dateutil>=1.4.1',
             'pytz'
             ],
