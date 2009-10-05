@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
-__url__     = 'http://jeremycantrell.com'
-__date__    = 'Tue 2009-03-17 16:59:15 (-0400)'
+__url__     = 'http://jmcantrell.me'
+__date__    = 'Sat 2009-10-03 23:53:02 (-0400)'
 __license__ = 'GPL'
 
 import calendar, pytz, math

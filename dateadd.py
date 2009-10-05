@@ -1,16 +1,10 @@
 #!/usr/bin/env python
 
-"""Increment/decrement a date by some unit(s) of time
-
-REQUIREMENTS:
-    python-dateutil
-    DateUtils
-    ScriptUtils
-"""
+"""Increment/decrement a date by some unit(s) of time"""
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
-__url__     = 'http://jeremycantrell.com'
-__date__    = 'Wed 2008-10-29 10:42:00 (-0400)'
+__url__     = 'http://jmcantrell.me'
+__date__    = 'Sat 2009-10-03 23:53:02 (-0400)'
 __license__ = 'GPL'
 
 import dateutils
