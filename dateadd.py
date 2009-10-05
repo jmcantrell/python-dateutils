@@ -4,7 +4,7 @@
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
 __url__     = 'http://jmcantrell.me'
-__date__    = 'Sat 2009-10-03 23:53:02 (-0400)'
+__date__    = 'Mon 2009-10-05 17:02:36 (-0400)'
 __license__ = 'GPL'
 
 import dateutils
@@ -14,34 +14,20 @@ from scriptutils.options import Options
 
 def get_options(): #{{{1
     p = Options('Usage: %prog [options] [date...]')
-    p.add_option('-h', '--help', action='help',
-            help='Show this help message and exit.')
-    p.add_option('-F', '--format', metavar='STRING',
-            default='%Y-%m-%d %H:%M:%S', help='Use STRING as output format')
-    p.add_option('-I', '--iterate', default=False,
-            action='store_true', help='Expand a date range')
-    p.add_option('-y', '--years', metavar='NUM',
-            type='int', default=0, help='Add NUM years to date(s)')
-    p.add_option('-m', '--months', metavar='NUM',
-            type='int', default=0, help='Add NUM months to date(s)')
-    p.add_option('-w', '--weeks', metavar='NUM',
-            type='int', default=0, help='Add NUM weeks to date(s)')
-    p.add_option('-d', '--days', metavar='NUM',
-            type='int', default=0, help='Add NUM days to date(s)')
-    p.add_option('-H', '--hours', metavar='NUM',
-            type='int', default=0, help='Add NUM hours to date(s)')
-    p.add_option('-M', '--minutes', metavar='NUM',
-            type='int', default=0, help='Add NUM minutes to date(s)')
-    p.add_option('-S', '--seconds', metavar='NUM',
-            type='int', default=0, help='Add NUM seconds to date(s)')
-    p.add_option('-u', '--microseconds', metavar='NUM',
-            type='int', default=0, help='Add NUM microseconds to date(s)')
-    p.add_option('-b', '--business-days', metavar='NUM',
-            type='int', default=0, help='Add NUM business days to date(s)')
-    p.add_option('--holidays', metavar='DATES',
-            help='Holidays to include (comma-separated)')
-    p.add_option('--holidays-file', metavar='FILE',
-            help='Holidays to include from a file')
+    p.add_option('-h', '--help', action='help', help='Show this help message and exit.')
+    p.add_option('-F', '--format', metavar='STRING', default='%Y-%m-%d %H:%M:%S', help='Use STRING as output format')
+    p.add_option('-I', '--iterate', default=False, action='store_true', help='Expand a date range')
+    p.add_option('-y', '--years', metavar='NUM', type='int', default=0, help='Add NUM years to date(s)')
+    p.add_option('-m', '--months', metavar='NUM', type='int', default=0, help='Add NUM months to date(s)')
+    p.add_option('-w', '--weeks', metavar='NUM', type='int', default=0, help='Add NUM weeks to date(s)')
+    p.add_option('-d', '--days', metavar='NUM', type='int', default=0, help='Add NUM days to date(s)')
+    p.add_option('-H', '--hours', metavar='NUM', type='int', default=0, help='Add NUM hours to date(s)')
+    p.add_option('-M', '--minutes', metavar='NUM', type='int', default=0, help='Add NUM minutes to date(s)')
+    p.add_option('-S', '--seconds', metavar='NUM', type='int', default=0, help='Add NUM seconds to date(s)')
+    p.add_option('-u', '--microseconds', metavar='NUM', type='int', default=0, help='Add NUM microseconds to date(s)')
+    p.add_option('-b', '--business-days', metavar='NUM', type='int', default=0, help='Add NUM business days to date(s)')
+    p.add_option('--holidays', metavar='DATES', help='Holidays to include (comma-separated)')
+    p.add_option('--holidays-file', metavar='FILE', help='Holidays to include from a file')
     opts, args = p.parse_args()
     kwargs = dict((k, v) for k, v in vars(opts).items() if k in dateutils.TIME_UNITS)
     return opts, args, kwargs

@@ -4,7 +4,7 @@
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
 __url__     = 'http://jmcantrell.me'
-__date__    = 'Sat 2009-10-03 23:53:02 (-0400)'
+__date__    = 'Mon 2009-10-05 17:02:36 (-0400)'
 __license__ = 'GPL'
 
 import dateutils
@@ -15,30 +15,18 @@ from scriptutils.options import Options
 
 def get_options(): #{{{1
     p = Options('Usage: %prog [options] start [end]')
-    p.add_option('-h', '--help', action='help',
-            help='Show this help message and exit.')
-    p.add_option('-y', '--years', action='store_const', dest='unit',
-            const='years', help='Show difference in years')
-    p.add_option('-m', '--months', action='store_const', dest='unit',
-            const='months', help='Show difference in months')
-    p.add_option('-w', '--weeks', action='store_const', dest='unit',
-            const='weeks', help='Show difference in weeks')
-    p.add_option('-d', '--days', action='store_const', dest='unit',
-            const='days', help='Show difference in days')
-    p.add_option('-H', '--hours', action='store_const', dest='unit',
-            const='hours', help='Show difference in hours')
-    p.add_option('-M', '--minutes', action='store_const', dest='unit',
-            const='minutes', help='Show difference in minutes')
-    p.add_option('-S', '--seconds', action='store_const', dest='unit',
-            const='seconds', help='Show difference in seconds')
-    p.add_option('-u', '--microseconds', action='store_const', dest='unit',
-            const='microseconds', help='Show difference in microseconds')
-    p.add_option('-b', '--business-days', action='store_const', dest='unit',
-            const='business_days', help='Show difference in business days')
-    p.add_option('--holidays', metavar='DATES',
-            help='Holidays to include (comma-separated)')
-    p.add_option('--holidays-file', metavar='FILE',
-            help='Holidays to include from a file')
+    p.add_option('-h', '--help', action='help', help='Show this help message and exit.')
+    p.add_option('-y', '--years', action='store_const', dest='unit', const='years', help='Show difference in years')
+    p.add_option('-m', '--months', action='store_const', dest='unit', const='months', help='Show difference in months')
+    p.add_option('-w', '--weeks', action='store_const', dest='unit', const='weeks', help='Show difference in weeks')
+    p.add_option('-d', '--days', action='store_const', dest='unit', const='days', help='Show difference in days')
+    p.add_option('-H', '--hours', action='store_const', dest='unit', const='hours', help='Show difference in hours')
+    p.add_option('-M', '--minutes', action='store_const', dest='unit', const='minutes', help='Show difference in minutes')
+    p.add_option('-S', '--seconds', action='store_const', dest='unit', const='seconds', help='Show difference in seconds')
+    p.add_option('-u', '--microseconds', action='store_const', dest='unit', const='microseconds', help='Show difference in microseconds')
+    p.add_option('-b', '--business-days', action='store_const', dest='unit', const='business_days', help='Show difference in business days')
+    p.add_option('--holidays', metavar='DATES', help='Holidays to include (comma-separated)')
+    p.add_option('--holidays-file', metavar='FILE', help='Holidays to include from a file')
     return p.parse_args()
 
 def main(): #{{{1
