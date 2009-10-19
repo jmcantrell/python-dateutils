@@ -4,7 +4,7 @@
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
 __url__     = 'http://jmcantrell.me'
-__date__    = 'Mon 2009-10-05 17:02:36 (-0400)'
+__date__    = 'Mon 2009-10-19 00:03:32 (-0400)'
 __license__ = 'GPL'
 
 import dateutils
@@ -55,6 +55,6 @@ def main(): #{{{1
     for dt in dates:
         print dt.strftime(opts.format)
 
-#}}}
+#}}}1
 
 if __name__ == '__main__': main()

@@ -4,13 +4,12 @@
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
 __url__     = 'http://jmcantrell.me'
-__date__    = 'Mon 2009-10-05 17:02:36 (-0400)'
+__date__    = 'Mon 2009-10-19 00:02:40 (-0400)'
 __license__ = 'GPL'
 
 import dateutils
 from datetime import datetime
 from dateutil.parser import parse
-from dateutil.relativedelta import relativedelta
 from scriptutils.options import Options
 
 def get_options(): #{{{1
@@ -46,6 +45,6 @@ def main(): #{{{1
         kwargs['holidays'] = holidays
     print getattr(dateutils, opts.unit)(end_dt, start_dt, **kwargs)
 
-#}}}
+#}}}1
 
 if __name__ == '__main__': main()
