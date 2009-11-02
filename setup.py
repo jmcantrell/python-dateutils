@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
-from glob import glob
+from setuptools import setup
 
 setup(
         name='DateUtils',
