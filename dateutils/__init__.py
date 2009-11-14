@@ -2,16 +2,25 @@
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
 __url__     = 'http://jmcantrell.me'
-__date__    = 'Sat 2009-10-03 23:53:02 (-0400)'
+__date__    = 'Sat 2009-11-14 18:24:07 (-0500)'
 __license__ = 'GPL'
 
 import calendar, pytz, math
 from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
-from dateutil.parser import parse
 
-TIME_UNITS = ['business_days', 'years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'microseconds']
-BUSINESS_DAY, YEAR, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MICROSECOND = range(len(TIME_UNITS))
+TIME_UNITS = [
+    'business_days',
+    'years',
+    'months',
+    'weeks',
+    'days',
+    'hours',
+    'minutes',
+    'seconds',
+    'microseconds'
+    ]
+
 QUARTER_MONTHS = [10, 1, 4, 7]
 
 def timezone(dt, timezone='utc'): #{{{1
@@ -59,7 +68,8 @@ def is_business_day(dt, holidays=[]): #{{{1
 def date_range(start_dt, end_dt, holidays=[], **inc): #{{{1
     """Generate a range of dates/datetimes based on the given increment."""
     # If incrementing by business days, make sure we start on one
-    if inc.get('business_days', 0) and not is_business_day(start_dt, holidays=holidays):
+    if inc.get('business_days', 0) and \
+            not is_business_day(start_dt, holidays=holidays):
         cur_dt = increment(start_dt, business_days=1, holidays=holidays)
     else:
         cur_dt = start_dt
@@ -126,4 +136,5 @@ def years(end_dt, start_dt): #{{{1
     return months(end_dt, start_dt)/12
 
 def business_days(end_dt, start_dt, holidays=[]): #{{{1
-    return len(list(date_range(start_dt, end_dt, business_days=1, holidays=holidays)))
+    return len(list(date_range(
+        start_dt, end_dt, business_days=1, holidays=holidays)))

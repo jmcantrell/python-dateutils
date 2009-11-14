@@ -4,8 +4,8 @@ from setuptools import setup
 
 setup(
         name='DateUtils',
-        version='0.4.1',
-        description='Various small utilities for working with date/datetime objects.',
+        version='0.4.2',
+        description='Various utilities for working with datetime objects.',
         author='Jeremy Cantrell',
         author_email='jmcantrell@gmail.com',
         classifiers=[
