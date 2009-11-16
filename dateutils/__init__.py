@@ -1,10 +1,3 @@
-#!/usr/bin/env python
-
-__author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
-__url__     = 'http://jmcantrell.me'
-__date__    = 'Sat 2009-11-14 18:24:07 (-0500)'
-__license__ = 'GPL'
-
 import calendar, pytz, math
 from datetime import datetime, date, timedelta
 from dateutil.relativedelta import relativedelta
@@ -68,8 +61,7 @@ def is_business_day(dt, holidays=[]): #{{{1
 def date_range(start_dt, end_dt, holidays=[], **inc): #{{{1
     """Generate a range of dates/datetimes based on the given increment."""
     # If incrementing by business days, make sure we start on one
-    if inc.get('business_days', 0) and \
-            not is_business_day(start_dt, holidays=holidays):
+    if inc.get('business_days', 0) and not is_business_day(start_dt, holidays=holidays):
         cur_dt = increment(start_dt, business_days=1, holidays=holidays)
     else:
         cur_dt = start_dt
@@ -79,13 +71,13 @@ def date_range(start_dt, end_dt, holidays=[], **inc): #{{{1
         cur_dt = increment(cur_dt, **inc)
         if cur_dt == prev_dt: break
 
-def month_start(d): #{{{1
+def month_start(dt): #{{{1
     """Get the beginning of the month for a given date."""
-    return date(*d.timetuple()[:2]+(1,))
+    return date(*dt.timetuple()[:2]+(1,))
 
-def month_end(d): #{{{1
+def month_end(dt): #{{{1
     """Get the end of the month for a given date."""
-    new_dt = increment(d, months=1)
+    new_dt = increment(dt, months=1)
     return month_start(dt) - timedelta(days=1)
 
 def quarter(dt): #{{{1
@@ -136,5 +128,4 @@ def years(end_dt, start_dt): #{{{1
     return months(end_dt, start_dt)/12
 
 def business_days(end_dt, start_dt, holidays=[]): #{{{1
-    return len(list(date_range(
-        start_dt, end_dt, business_days=1, holidays=holidays)))
+    return len(list(date_range(start_dt, end_dt, business_days=1, holidays=holidays)))

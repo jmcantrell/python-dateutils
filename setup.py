@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
         name='DateUtils',
-        version='0.4.2',
+        version='0.5.0',
         description='Various utilities for working with datetime objects.',
         author='Jeremy Cantrell',
         author_email='jmcantrell@gmail.com',
@@ -17,21 +17,10 @@ setup(
             'Programming Language :: Python',
             ],
         install_requires=[
-            'ScriptUtils',
             'python-dateutil',
             'pytz'
             ],
-        entry_points={
-            'console_scripts': [
-                'dateadd=dateadd:main',
-                'datediff=datediff:main',
-                ]
-            },
         packages=[
             'dateutils',
             ],
-        py_modules=[
-            'dateadd',
-            'datediff',
-            ]
         )
