@@ -65,7 +65,7 @@ def date_range(start_dt, end_dt, holidays=[], **inc): #{{{1
         cur_dt = increment(start_dt, business_days=1, holidays=holidays)
     else:
         cur_dt = start_dt
-    while cur_dt < end_dt:
+    while cur_dt <= end_dt:
         yield cur_dt
         prev_dt = cur_dt
         cur_dt = increment(cur_dt, **inc)
