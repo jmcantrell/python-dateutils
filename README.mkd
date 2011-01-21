@@ -10,9 +10,9 @@ calculation.
 Installation
 ------------
 
-If you have setuptools installed, you can install DateUtils with:
+You should install DateUtils with pip:
 
-    easy_install DateUtils
+    pip install dateutils
 
 Otherwise, you'll have to download the package and run:
 
