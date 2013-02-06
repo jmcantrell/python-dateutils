@@ -4,10 +4,12 @@ from setuptools import setup
 
 setup(
         name='DateUtils',
-        version='0.5.2',
+        version='0.6.5',
         description='Various utilities for working with datetime objects.',
         author='Jeremy Cantrell',
         author_email='jmcantrell@gmail.com',
+        zip_safe=False,
+        include_package_data=True,
         classifiers=[
             'Development Status :: 4 - Beta',
             'Intended Audience :: Developers',
@@ -17,9 +19,16 @@ setup(
             'Programming Language :: Python',
             ],
         install_requires=[
+            'argparse',
             'python-dateutil',
             'pytz'
             ],
+        entry_points={
+            'console_scripts': [
+                'dateadd = dateutils.dateadd:main',
+                'datediff = dateutils.datediff:main',
+                ],
+            },
         packages=[
             'dateutils',
             ],
