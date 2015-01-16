@@ -17,6 +17,7 @@ setup(
             'Natural Language :: English',
             'Operating System :: POSIX :: Linux',
             'Programming Language :: Python',
+            'Programming Language :: Python :: 3',
             ],
         install_requires=[
             'argparse',
