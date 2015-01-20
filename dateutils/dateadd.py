@@ -2,6 +2,7 @@ from . import TIME_UNITS, date_range, increment
 from dateutil.parser import parse
 from datetime import datetime
 from argparse import ArgumentParser
+from future import print_function
 
 
 def get_arguments():
@@ -53,4 +54,4 @@ def main():
         if any(bool(v) for v in kwargs.values()):
             dates = [increment(dt, **kwargs) for dt in dates]
     for dt in dates:
-        print dt.strftime(args.format)
+        print(dt.strftime(args.format))

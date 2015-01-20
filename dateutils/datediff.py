@@ -1,6 +1,7 @@
 from datetime import datetime
 from dateutil.parser import parse
 from argparse import ArgumentParser
+from future import print_function
 
 
 def get_arguments():
@@ -37,4 +38,4 @@ def main():
         if args.holiday_file:
             holidays.extend(parse(l) for l in open(args.holiday_file))
         kwargs['holidays'] = holidays
-    print __import__(args.unit)(end_dt, start_dt, **kwargs)
+    print(__import__(args.unit)(end_dt, start_dt, **kwargs))
