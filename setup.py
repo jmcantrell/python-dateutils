@@ -21,6 +21,7 @@ setup(
             ],
         install_requires=[
             'argparse',
+            'future',
             'python-dateutil',
             'pytz'
             ],
