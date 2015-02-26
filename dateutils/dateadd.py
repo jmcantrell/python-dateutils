@@ -1,8 +1,8 @@
+from __future__ import print_function
 from . import TIME_UNITS, date_range, increment
 from dateutil.parser import parse
 from datetime import datetime
 from argparse import ArgumentParser
-from future import print_function
 
 
 def get_arguments():
