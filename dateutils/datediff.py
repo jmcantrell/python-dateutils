@@ -1,7 +1,7 @@
+from __future__ import print_function
 from datetime import datetime
 from dateutil.parser import parse
 from argparse import ArgumentParser
-from future import print_function
 
 
 def get_arguments():
