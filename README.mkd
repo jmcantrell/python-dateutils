@@ -1,4 +1,4 @@
-DateUtils
+dateutils
 =========
 
 The main purpose of this package is to provide more complex arithmetic
@@ -10,7 +10,7 @@ calculation.
 Installation
 ------------
 
-You should install DateUtils with pip:
+You should install dateutils with pip:
 
     pip install dateutils
 
