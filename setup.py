@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
 
     name='dateutils',
-    version='0.6.7',
+    version='0.6.8',
 
     description='Various utilities for working with date and datetime objects',
 
