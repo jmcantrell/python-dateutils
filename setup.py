@@ -11,6 +11,7 @@ setup(
 
     author='Jeremy Cantrell',
     author_email='jmcantrell@gmail.com',
+    url='https://github.com/jmcantrell/python-dateutils',
 
     zip_safe=False,
     include_package_data=True,
