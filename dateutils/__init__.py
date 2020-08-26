@@ -17,19 +17,19 @@ TIME_UNITS = [
 QUARTER_MONTHS = [10, 1, 4, 7]
 
 
-def timezone(dt, timezone='utc'):  # {{{1
+def timezone(dt, timezone='utc'):
     """Add timezone information to a naive datetime."""
     timezone = pytz.timezone(timezone)
     return datetime(tzinfo=timezone, *dt.timetuple()[:6])
 
 
-def timezone_convert(dt, timezone):  # {{{1
+def timezone_convert(dt, timezone):
     """Convert aware datetime to a different timezone."""
     timezone = pytz.timezone(timezone)
     return dt.astimezone(timezone)
 
 
-def increment(dt, business_days=0, holidays=[], **inc):  # {{{1
+def increment(dt, business_days=0, holidays=[], **inc):
     """Increment a date by the given amount.
     Arguments:
         dt -- the date to increment
@@ -57,7 +57,7 @@ def increment(dt, business_days=0, holidays=[], **inc):  # {{{1
     return new_dt
 
 
-def is_business_day(dt, holidays=[]):  # {{{1
+def is_business_day(dt, holidays=[]):
     if dt.weekday() in (calendar.SATURDAY, calendar.SUNDAY):
         return False
     if holidays and dt in holidays:
@@ -65,7 +65,7 @@ def is_business_day(dt, holidays=[]):  # {{{1
     return True
 
 
-def date_range(start_dt, end_dt, holidays=[], **inc):  # {{{1
+def date_range(start_dt, end_dt, holidays=[], **inc):
     """Generate a range of dates/datetimes based on the given increment."""
     # If incrementing by business days, make sure we start on one
     if inc.get('business_days', 0) and not is_business_day(start_dt, holidays=holidays):
@@ -80,17 +80,17 @@ def date_range(start_dt, end_dt, holidays=[], **inc):  # {{{1
             break
 
 
-def month_start(dt):  # {{{1
+def month_start(dt):
     """Get the beginning of the month for a given date."""
     return date(*dt.timetuple()[:2]+(1,))
 
 
-def month_end(dt):  # {{{1
+def month_end(dt):
     """Get the end of the month for a given date."""
     return month_start(dt) - timedelta(days=1)
 
 
-def quarter(dt):  # {{{1
+def quarter(dt):
     """Get the quarter for a given date."""
     quarter_months = [range(r, r+3) for r in (i for i in QUARTER_MONTHS)]
     for qm in quarter_months:
@@ -98,57 +98,57 @@ def quarter(dt):  # {{{1
             return quarter_months.index(qm) + 1
 
 
-def quarter_start(dt):  # {{{1
+def quarter_start(dt):
     """Get the beginning of the quarter for a given date."""
     m = QUARTER_MONTHS.index(quarter(dt)-1) + 2
     return date(dt.year, m, 1)
 
 
-def quarter_end(dt):  # {{{1
+def quarter_end(dt):
     """Get the end of the quarter for a given date."""
     m = QUARTER_MONTHS.index(quarter(dt)-1) + 2
     return month_end(date(dt.year, m, 1))
 
 
-def day_of_year(dt):  # {{{1
+def day_of_year(dt):
     return dt.timetuple()[7]
 
 
-def microseconds(end_dt, start_dt):  # {{{1
+def microseconds(end_dt, start_dt):
     d = end_dt - start_dt
     return (d.days*24*60*60*1000000)+(d.seconds*1000000)
 
 
-def seconds(end_dt, start_dt):  # {{{1
+def seconds(end_dt, start_dt):
     d = end_dt - start_dt
     return (d.days*24*60*60)+d.seconds
 
 
-def minutes(end_dt, start_dt):  # {{{1
+def minutes(end_dt, start_dt):
     d = end_dt - start_dt
     return (d.days*24*60)+(d.seconds/60)
 
 
-def hours(end_dt, start_dt):  # {{{1
+def hours(end_dt, start_dt):
     d = end_dt - start_dt
     return (d.days*24)+(d.seconds/60/60)
 
 
-def days(end_dt, start_dt):  # {{{1
+def days(end_dt, start_dt):
     return (end_dt - start_dt).days
 
 
-def weeks(end_dt, start_dt):  # {{{1
+def weeks(end_dt, start_dt):
     return int(math.ceil(days(end_dt, start_dt)/7.0))
 
 
-def months(end_dt, start_dt):  # {{{1
+def months(end_dt, start_dt):
     return days(end_dt, start_dt)/31
 
 
-def years(end_dt, start_dt):  # {{{1
+def years(end_dt, start_dt):
     return months(end_dt, start_dt)/12
 
 
-def business_days(end_dt, start_dt, holidays=[]):  # {{{1
+def business_days(end_dt, start_dt, holidays=[]):
     return len(list(date_range(start_dt, end_dt, business_days=1, holidays=holidays)))
