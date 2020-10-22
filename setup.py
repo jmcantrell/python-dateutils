@@ -35,7 +35,7 @@ setup(
     ],
 
     install_requires=[
-        'argparse',
+        'argparse; python_version < "2.7"',
         'python-dateutil',
         'pytz'
     ],
