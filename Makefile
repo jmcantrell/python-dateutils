@@ -1,14 +1,14 @@
 DIST := dist
 
-all: clean
+build: clean
 	python setup.py sdist
 	python setup.py bdist_wheel --universal
 
 clean:
 	rm -rf $(DIST)
 
-check:
+check: build
 	twine check $(DIST)/*
 
-upload:
+upload: check
 	twine upload $(DIST)/*

@@ -11,7 +11,7 @@ with open(path.join(this_directory, 'README.mkd'), encoding='utf-8') as f:
 setup(
 
     name='dateutils',
-    version='0.6.10',
+    version='0.6.12',
 
     description='Various utilities for working with date and datetime objects',
 
